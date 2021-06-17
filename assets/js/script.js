@@ -4,6 +4,11 @@
 const template = document.createElement("template");
 template.innerHTML = '<style>h3 {color: red;}</style><section class="profil_info"><div><h3></h3><article id="info"><p><slot name="email" /></p><p>TLF</p></article><button id="toggle-info">HIDE INFO</button></div><article></article></section>';
 
+
+
+
+
+
 class ProfilInfo extends HTMLElement {
     constructor() {
         super();
