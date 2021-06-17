@@ -1,0 +1,50 @@
+/*CSS by Anders Erik Nissen
+UCN MMDA0920*/
+@charset "uft-8";
+* {box-sizing: border-box;}
+
+
+
+
+/*############### 
+    VARIABLER 
+################*/
+
+
+/*###########  
+    GRID  
+############*/
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-column-desk), 1fr);
+    grid-gap: var(--grid-gap);
+}
+.grid-clmnCenter {
+    justify-content: center;
+    align-items: center;
+}
+/*##########
+    FLEX 
+###########*/
+.flex-center-XandY {
+    display: flex;
+    flex-direction: var(--flex-direction);
+    flex-wrap: var(--flex-wrap);
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*##################
+    MEDIA QUERIES 
+###################*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(var(--grid-column-tablet), 1fr);
+    }
+}
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(var(--grid-column-mobil), 1fr);
+    }
+}

@@ -1,0 +1,20 @@
+:root {
+    /* 
+    --- Font
+    */
+    --font-size-non-desk: 16px;
+    --font-size-desk: 18px;
+    
+    /*_____GRID*/
+    --grid-column-desk: 12;    
+    --grid-column-tablet: 8;    
+    --grid-column-mobil: 4;
+    /* 
+    - 3s
+    */
+    --grid-row-header: 1 / 7 /    
+    --grid-gap: 1rem;
+    /* ____FLEX */
+    --flex-direction: row;
+    --flex-wrap: nowrap;
+    }
