@@ -53,14 +53,6 @@ window.customElements.define('profil-info', ProfilInfo);
 
 
 
-// console.log()
-
-//        /\
-//       /  \
-//      / /\ \
-//     / /__\ \
-//    / /____\ \
-//   /_/      \_\
 
 
 
@@ -85,27 +77,12 @@ window.customElements.define('profil-info', ProfilInfo);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log("        /\\       _______   ___    __ ")
+console.log("       /  \\     |   ____| |   \\  |  |")
+console.log("      / /\\ \\    |  |____  |    \\ |  |")
+console.log("     / /__\\ \\   |   ____| |  |\\ \\|  |")
+console.log("    / /____\\ \\  |  |____  |  | \\    |")
+console.log("   /_/      \\_\\ |_______| |__|  \\___|")
 
 // console.log("               ____________                _____________________________    ________            _______")
 // console.log("              /            \\              |                             |  |         \\         |       |")
