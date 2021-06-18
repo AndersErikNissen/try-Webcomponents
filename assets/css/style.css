@@ -48,3 +48,8 @@ UCN MMDA0920*/
         grid-template-columns: repeat(var(--grid-column-mobil), 1fr);
     }
 }
+
+.show {
+    height: 100%;
+    animation: letShow 1s forwards ease-in-out;
+}

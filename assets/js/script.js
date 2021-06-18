@@ -7,12 +7,13 @@ showMe_template.innerHTML = `
             #container {
                 padding-bottom: 25px
             }
-            #main, #content  {
-                background-color: grey;
+            #main, #content {
+                background-color: #e46;
                 width: 50%;
-                height: 300px;
             }
             #main {
+                background-color: #eee;
+                height: 300px;
                 position: relative;
             }
             #showAndHide-btn {
@@ -22,19 +23,25 @@ showMe_template.innerHTML = `
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
+                border: none;
             }
             #content {
-                // display: none;
+                
             }
 
             .show {
-                height: 100%;
-                transition: 1s;
+                animation: letShow 1s forwards ease-in-out;
             }
-
+            @keyframes letShow {
+                from {height: 0;}
+                to {height: 100px;}
+            }
             .hide {
-                height: 0;
-                transition: 1s;
+                animation: letHide 1s forwards ease-in-out;
+            }
+            @keyframes letHide {
+                from {height: 100px;}
+                to {height: 0;}
             }
         </style>
         <section id="container">
@@ -48,6 +55,9 @@ showMe_template.innerHTML = `
             </section>
         </section>
 `;
+
+// For filling from the middle: https://stackoverflow.com/questions/23934749/fill-element-from-center-on-hover
+
 class showMe extends HTMLElement {
     constructor() {
         super();
@@ -60,20 +70,20 @@ class showMe extends HTMLElement {
         const   btn = this.shadowRoot.querySelector("#showAndHide-btn"),
                 content = this.shadowRoot.querySelector("#content");
         btn.addEventListener("click", () => {
-            let classList = content.classList,
-                b = content.style.display = "block",
-                n = content.style.display = "none";
+            let classList = content.classList;
 
             switch (true) {
                 case classList.contains("hide"):
                     classList.remove("hide");
                     setTimeout(content.style.display = "block", 1000)
                     // content.style.display = "block";
+                    btn.style.backgroundColor = "#e46"
                     classList.add("show");
                     break;
-                case classList.contains("show"):
-                    classList.remove("show");
+                    case classList.contains("show"):
+                        classList.remove("show");
                     // content.style.display = "none";
+                    btn.style.backgroundColor = "#eee"
                     classList.add("hide");
                     break;
                 
