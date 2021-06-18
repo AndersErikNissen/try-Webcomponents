@@ -8,11 +8,11 @@ showMe_template.innerHTML = `
                 padding-bottom: 25px
             }
             #main, #content {
-                background-color: #e46;
+                background-color: var(--color-secondary);
                 width: 50%;
             }
             #main {
-                background-color: #eee;
+                background-color: var(--color-primary);
                 height: 300px;
                 position: relative;
             }
@@ -24,11 +24,8 @@ showMe_template.innerHTML = `
                 height: 50px;
                 border-radius: 50%;
                 border: none;
+                font-size: 40px
             }
-            #content {
-                
-            }
-
             .show {
                 animation: letShow 1s forwards ease-in-out;
             }
@@ -75,15 +72,30 @@ class showMe extends HTMLElement {
             switch (true) {
                 case classList.contains("hide"):
                     classList.remove("hide");
-                    setTimeout(content.style.display = "block", 1000)
+                    // setTimeout(content.style.display = "block", 1000)
                     // content.style.display = "block";
-                    btn.style.backgroundColor = "#e46"
+
+
+                    //Virker faktisk. Men kan ikke bruges i Template, fordi den findes inden denne class(this).
+                    // btn.style.backgroundColor = this.getAttribute("primaryColor");
+                    btn.style.backgroundColor = "var(--color-primary)";
+                    btn.style.color = "white";
+
+
+
+                    // btn.style.transform = "rotate(90deg)";
+
+
                     classList.add("show");
                     break;
+
+
                     case classList.contains("show"):
-                        classList.remove("show");
+                    classList.remove("show");
+                    // btn.style.backgroundColor = this.getAttribute("secondaryColor");
                     // content.style.display = "none";
-                    btn.style.backgroundColor = "#eee"
+                    btn.style.backgroundColor = "#eee";
+                    btn.style.color = "black";
                     classList.add("hide");
                     break;
                 
