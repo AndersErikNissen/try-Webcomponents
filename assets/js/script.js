@@ -1,12 +1,45 @@
 //JS by Anders Erik Nissen
 //UCN MMDA0920
 
+
+const aen_btn = document.createElement("template");
+aen_btn.innerHTML = '<button type="button" id="aen_btn"></button>'      
+
+class aenBtn extends HTMLElement {
+  static get observedAttributes() {
+    return ['btntxt'];
+  };
+
+  get btntxt() {
+    return this.getAttribute("btntxt");
+  }
+
+  set btntxt(btn) {
+    if (btn) {
+      this.setAttribute("btntxt", btn);
+    } else {
+      this.removeAttribute("btntxt");
+    }
+  }
+
+  constructor() {
+      super();
+      this.attachShadow({mode: "open"});
+      this.shadowRoot.appendChild(aen_btn.content.cloneNode(true));
+    }
+    
+    connectedCallback() {
+    const aenBtn = this.shadowRoot.querySelector("#aen_btn");
+    }
+}
+window.customElements.define('aen-btn', aenBtn);
+
 const showMe_template = document.createElement("template");
 showMe_template.innerHTML = `
         <style>
             * {margin: 0; padding: 0;}
             #container {
-                padding-bottom: 25px
+                padding-bottom: 25px;
             }
             #main, #content {
                 background-color: var(--color-secondary);
@@ -16,6 +49,7 @@ showMe_template.innerHTML = `
                 background-color: var(--color-primary);
                 height: 300px;
                 position: relative;
+                z-index: 2;
             }
             #showAndHide-btn {
                 position: absolute;
@@ -25,8 +59,53 @@ showMe_template.innerHTML = `
                 height: 50px;
                 border-radius: 50%;
                 border: none;
-                font-size: 40px
+                font-size: 40px;
+                color: var(--color-primary);
+                /*background-color: white;*/
+                /*
+                background-image: radial-gradient(circle, var(--color-primary), var(--color-primary));
+                background-size: 0%;
+                background-repeat: no-repeat;*/
+               /* background-position: 50% 50%; */
             }
+            #showAndHide-btn:after {
+              content: '';               
+              position: absolute;   
+              top: 0;
+              left: 0;       
+              display: block;            
+              border-radius: 50%;
+              height: 50px;
+              width: 50px;
+              margin: auto;               
+              background-color: blue;
+              opacity: .5;
+              transform: scale(0);
+
+
+              /* Det ser ud til at virke*/
+              transition: 1s;
+              z-index:10;
+            }
+            #showAndHide-btn.activeBtn:after {
+              transform: scale(1);
+            }
+            
+            /*.changeBtn_To {
+              animation: changeBtnTo 1s forwards ease-in-out;
+            }
+            @keyframes changeBtnTo {
+              from {background-size: 0%; color: var(--color-primary);}
+              to {background-size: 100%; color: white;}
+            }
+            .changeBtn_From {
+              animation: changeBtnFrom 1s forwards ease-in-out;
+            }
+            @keyframes changeBtnFrom {
+              from {background-size: 100% 100%; color: white;}
+              to {background-size: 100% 0%; color: var(--color-primary);}
+            } */
+
             .show {
                 animation: letShow 1s forwards ease-in-out;
             }
@@ -49,8 +128,16 @@ showMe_template.innerHTML = `
                 animation: letHide 1s forwards ease-in-out;
             }
             @keyframes letHide {
-                from {height: 100px;}
-                to {height: 0;}
+              0% {
+                opacity: 1;
+                height: 100px;
+              }
+              100% {
+                opacity: 0;
+                height: 0;
+                display: none;
+                opacity: 0;
+              }
             }
         </style>
         <section id="container">
@@ -66,6 +153,8 @@ showMe_template.innerHTML = `
 `;
 
 // For filling from the middle: https://stackoverflow.com/questions/23934749/fill-element-from-center-on-hover
+
+//Prøv, den bruger :after https://stackoverflow.com/questions/40163007/fill-circle-shaped-div-from-center-with-color-on-click
 
 class showMe extends HTMLElement {
     constructor() {
@@ -91,36 +180,29 @@ function changeClass(btn, content) {
         switch (true) {
             case classList.contains("hide"):
                 classList.remove("hide");
-                // setTimeout(content.style.display = "block", 1000)
-                // content.style.display = "block";
-
-
-                //Virker faktisk. Men kan ikke bruges i Template, fordi den findes inden denne class(this).
-                btn.style.backgroundColor = "var(--color-primary)";
-                btn.style.color = "white";
-
-
-
-                // btn.style.transform = "rotate(90deg)";
-
-
+                btn.classList.remove("changeBtn_From");
+                btn.classList.add("changeBtn_To", "activeBtn");
                 classList.add("show");
-                break;
+              break;
 
-
-                case classList.contains("show"):
+            case classList.contains("show"):
                 classList.remove("show");
-                // btn.style.backgroundColor = this.getAttribute("secondaryColor");
-                // content.style.display = "none";
-                btn.style.backgroundColor = "#eee";
-                btn.style.color = "black";
+                btn.classList.remove("changeBtn_To");
+                btn.classList.add("changeBtn_From");
                 classList.add("hide");
-                break;
+              break;
             
         }
     })
 }
 window.customElements.define('show-me', showMe);
+
+
+
+
+
+
+
 
 // define the component's HTML template - Example from: https://ultimatecourses.com/blog/lifecycle-hooks-in-web-components
 const template = document.createElement('template');
