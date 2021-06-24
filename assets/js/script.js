@@ -61,16 +61,17 @@ showMe_template.innerHTML = `
                 border: none;
                 font-size: 40px;
                 color: var(--color-primary);
-                /*background-color: white;*/
+                background-color: transparent;
                 /*
                 background-image: radial-gradient(circle, var(--color-primary), var(--color-primary));
                 background-size: 0%;
                 background-repeat: no-repeat;*/
                /* background-position: 50% 50%; */
             }
-            #showAndHide-btn:after {
+            #showAndHide-btn::after {
               content: '';               
-              position: absolute;   
+              position: absolute; 
+              z-index: -1; 
               top: 0;
               left: 0;       
               display: block;            
@@ -79,15 +80,14 @@ showMe_template.innerHTML = `
               width: 50px;
               margin: auto;               
               background-color: blue;
-              opacity: .5;
               transform: scale(0);
 
 
               /* Det ser ud til at virke*/
               transition: 1s;
-              z-index:10;
+             /* z-index:10;*/
             }
-            #showAndHide-btn.activeBtn:after {
+            #showAndHide-btn.activeBtn::after{
               transform: scale(1);
             }
             
