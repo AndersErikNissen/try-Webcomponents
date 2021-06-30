@@ -5,7 +5,9 @@
     --font-size-non-desk: 16px;
     --font-size-desk: 18px;
     
-    /*_____GRID*/
+    /*
+    ----- GRID
+    */
     --grid-column-desk: 12;    
     --grid-column-tablet: 8;    
     --grid-column-mobil: 4;
@@ -14,16 +16,89 @@
     */
     --grid-row-header: 1 / 7 /    
     --grid-gap: 1rem;
-    /* ____FLEX */
+    /*
+    ----- FLEX
+    */
     --flex-direction: row;
     --flex-wrap: nowrap;
 
+    /*
+    ----- Colors
+    */
     --color-primary: #e46;
     --color-secondary: #eee;
-    }
 
+    /*
+    ----- Button
+    */
+    --btn-corner: 2.5px;
+    --btn-corner-small: calc(var(--btn-corner) * 1);
+    --btn-corner-medium: calc(var(--btn-corner) * 2);
+    --btn-corner-large: calc(var(--btn-corner) * 4);
+    /* Sizing Button */
+    --btn-min-width: 15ch;
+    --btn-min-height: 44px;
+}
 
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: red;
+    background-image: linear-gradient(blue, blue);
+    background-repeat: no-repeat;
+    /* background-position: 0 calc(var(--btn-min-height) * 2); */
+    background-size: 0%;
+    cursor: pointer;
 
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.2rem;
+    white-space: nowrap;
+    text-align: center;
+    
+    padding: .5rem .75rem;
+    margin: .40rem;
+    
+    /* CH is the width a 0(Zero), which can change with Font-Size/Familiy and Weight(Italic, Bold) */
+    min-width: var(--btn-min-width);
+    min-height: var(--btn-min-height);
 
+    border-radius: var(--btn-corner-medium);
+    transition: 1s ease-in-out;
+}
+
+.button:hover {
+    background-position: 0 0;
+    background-size: 100%;
+}
+.button:active{
+    background-position: 0 calc(var(--btn-min-height) * -2);
+    transition: 1s;
+}
 
     
+
+
+/* Round Btn - background moving */
+/* #showAndHide-btn::after {
+    content: '';               
+    position: absolute; 
+    z-index: -1; 
+    top: 0;
+    left: 0;       
+    display: block;            
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: auto;               
+    background-color: blue;
+    transform: scale(0);
+
+
+    transition: 1s;
+    z-index:10;
+  } */

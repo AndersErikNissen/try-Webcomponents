@@ -42,7 +42,7 @@ showMe_template.innerHTML = `
                 padding-bottom: 25px;
             }
             #main, #content {
-                background-color: var(--color-secondary);
+                background-color: white;
                 width: 50%;
             }
             #main {
@@ -61,53 +61,30 @@ showMe_template.innerHTML = `
                 border: none;
                 font-size: 40px;
                 color: var(--color-primary);
-                background-color: transparent;
-                /*
+                background-color: white;
                 background-image: radial-gradient(circle, var(--color-primary), var(--color-primary));
                 background-size: 0%;
-                background-repeat: no-repeat;*/
-               /* background-position: 50% 50%; */
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
             }
-            #showAndHide-btn::after {
-              content: '';               
-              position: absolute; 
-              z-index: -1; 
-              top: 0;
-              left: 0;       
-              display: block;            
-              border-radius: 50%;
-              height: 50px;
-              width: 50px;
-              margin: auto;               
-              background-color: blue;
-              transform: scale(0);
-
-
-              /* Det ser ud til at virke*/
-              transition: 1s;
-             /* z-index:10;*/
-            }
-            #showAndHide-btn.activeBtn::after{
-              transform: scale(1);
-            }
-            
-            /*.changeBtn_To {
-              animation: changeBtnTo 1s forwards ease-in-out;
+           
+            .changeBtn_To {
+              animation: changeBtnTo .5s forwards ease-in-out;
             }
             @keyframes changeBtnTo {
-              from {background-size: 0%; color: var(--color-primary);}
-              to {background-size: 100%; color: white;}
+              from {background-size: 100% 0%; color: var(--color-primary);}
+              to {background-size: 100% 100%; color: white;}
             }
             .changeBtn_From {
-              animation: changeBtnFrom 1s forwards ease-in-out;
+              animation: changeBtnFrom .5s forwards ease-in-out;
             }
             @keyframes changeBtnFrom {
               from {background-size: 100% 100%; color: white;}
               to {background-size: 100% 0%; color: var(--color-primary);}
-            } */
+            }
 
             .show {
-                animation: letShow 1s forwards ease-in-out;
+                animation: letShow .5s forwards ease-in-out;
             }
             @keyframes letShow {
                 0% {
@@ -125,7 +102,7 @@ showMe_template.innerHTML = `
                   }
             }
             .hide {
-                animation: letHide 1s forwards ease-in-out;
+                animation: letHide .5s forwards ease-in-out;
             }
             @keyframes letHide {
               0% {
@@ -253,12 +230,14 @@ class CounterComponent extends HTMLElement {
   }
 
   set value(val) {
+
     if (val) {
-      this.setAttribute('value', val);
+      this.setAttribute("value", val);
     } else {
       this.removeAttribute('value');
     }
   }
+
 
   get step() {
     return this.getAttribute('step');
@@ -310,8 +289,9 @@ class CounterComponent extends HTMLElement {
 
     console.log(newValue)
 
-    console.log(oldValue)
-    console.log(name)
+    console.log("Old =",oldValue)
+    console.log("Name =", name)
+    console.log("This Value =",this.value)
   }
 
   adoptedCallback() {
@@ -332,7 +312,6 @@ class CounterComponent extends HTMLElement {
 }
 
 customElements.define('my-counter', CounterComponent);
-
 
 
 
