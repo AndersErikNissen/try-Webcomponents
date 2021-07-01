@@ -72,15 +72,31 @@ showMe_template.innerHTML = `
               animation: changeBtnTo .5s forwards ease-in-out;
             }
             @keyframes changeBtnTo {
-              from {background-size: 100% 0%; color: var(--color-primary);}
-              to {background-size: 100% 100%; color: white;}
+              from {
+                background-size: 100% 0%; 
+                color: var(--color-primary); 
+                transform: rotate(0deg);
+              }
+              to {
+                background-size: 100% 100%; 
+                color: white;
+                transform: rotate(45deg);
+              }
             }
             .changeBtn_From {
               animation: changeBtnFrom .5s forwards ease-in-out;
             }
             @keyframes changeBtnFrom {
-              from {background-size: 100% 100%; color: white;}
-              to {background-size: 100% 0%; color: var(--color-primary);}
+              from {
+                background-size: 100% 100%; 
+                color: white;transform: 
+                rotate(45deg);
+              }
+              to {
+                background-size: 100% 0%; 
+                color: var(--color-primary);
+                transform: rotate(0deg);
+              }
             }
 
             .show {
@@ -145,32 +161,28 @@ class showMe extends HTMLElement {
     connectedCallback() {
         const   btn = this.shadowRoot.querySelector("#showAndHide-btn"),
                 content = this.shadowRoot.querySelector("#content");
-        changeClass(btn, content)
+        
+        btn.addEventListener("click", () => {
+            let list = content.classList;
+            switch (true) {
+                case list.contains("hide"):
+                  list.remove("hide");
+                  btn.classList.remove("changeBtn_From");
+                  btn.classList.add("changeBtn_To", "activeBtn");
+                  list.add("show");
+                break;
+
+                case list.contains("show"):
+                  list.remove("show");
+                  btn.classList.remove("changeBtn_To");
+                  btn.classList.add("changeBtn_From");
+                  list.add("hide");
+                break;
+            }
+        })
     }
 
     static get observedAttributes() {};
-}
-function changeClass(btn, content) {
-    btn.addEventListener("click", () => {
-        let classList = content.classList;
-
-        switch (true) {
-            case classList.contains("hide"):
-                classList.remove("hide");
-                btn.classList.remove("changeBtn_From");
-                btn.classList.add("changeBtn_To", "activeBtn");
-                classList.add("show");
-              break;
-
-            case classList.contains("show"):
-                classList.remove("show");
-                btn.classList.remove("changeBtn_To");
-                btn.classList.add("changeBtn_From");
-                classList.add("hide");
-              break;
-            
-        }
-    })
 }
 window.customElements.define('show-me', showMe);
 
