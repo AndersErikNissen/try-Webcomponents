@@ -3,9 +3,15 @@
 
 
 const aen_btn = document.createElement("template");
-aen_btn.innerHTML = '<button type="button" id="aen_btn"></button>'      
+aen_btn.innerHTML = '<button type="button" id="aen_btn"><slot name="innerText">BUTTON</slot></button>'      
 
 class aenBtn extends HTMLElement {
+  constructor() {
+      super();
+      this.attachShadow({mode: "open"});
+      this.shadowRoot.appendChild(aen_btn.content.cloneNode(true));
+    }
+    
   static get observedAttributes() {
     return ['btntxt'];
   };
@@ -22,14 +28,8 @@ class aenBtn extends HTMLElement {
     }
   }
 
-  constructor() {
-      super();
-      this.attachShadow({mode: "open"});
-      this.shadowRoot.appendChild(aen_btn.content.cloneNode(true));
-    }
-    
     connectedCallback() {
-    const aenBtn = this.shadowRoot.querySelector("#aen_btn");
+      const aenBtn = this.shadowRoot.querySelector("#aen_btn");
     }
 }
 window.customElements.define('aen-btn', aenBtn);
